@@ -1,146 +1,198 @@
 import Hero from "@/components/Hero";
 import FeatureCard from "@/components/FeatureCard";
+import HowItWorks from "@/components/HowItWorks";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import {
+  ArrowUpRight,
+  BarChart3,
+  Link2,
+  ShieldCheck,
+  Wallet,
+} from "lucide-react";
 
 export default function Home() {
-
   const features = [
-  {
-    title: "Payment Links",
-    description: "Create and share secure payment links in seconds.",
-    href: "/dashboard",
-  },
-  {
-    title: "Wallet Identity",
-    description: "Your verified on-chain identity powered by Arc.",
-    href: "/profile",
-  },
-  {
-    title: "Explorer",
-    description: "Track every transaction directly on Arc Testnet.",
-    href: "/explorer",
-  },
-  {
-    title: "Faucet",
-    description: "Claim free Arc testnet tokens instantly.",
-    href: "/faucet",
-  },
-];
+    {
+      title: "Payment Links",
+      description:
+        "Create a payment request and share one simple link with anyone.",
+      href: "/dashboard",
+      icon: Link2,
+    },
+    {
+      title: "Wallet Integration",
+      description:
+        "Connect your wallet and receive payments directly on Arc Testnet.",
+      href: "/profile",
+      icon: Wallet,
+    },
+    {
+      title: "On-chain Tracking",
+      description:
+        "Keep track of payment activity and completed transactions.",
+      href: "/history",
+      icon: BarChart3,
+    },
+    {
+      title: "Arc Explorer",
+      description:
+        "View wallet activity and transactions directly through Arc.",
+      href: "/explorer",
+      icon: ShieldCheck,
+    },
+  ];
 
   return (
-    <main className="min-h-screen bg-black text-white">
-
+    <main className="overflow-hidden bg-[#05070b] text-white">
       <Hero />
 
-      <section className="grid gap-6 px-8 pb-20 md:grid-cols-2 lg:grid-cols-4">
-       {features.map((feature) => (
-  <FeatureCard
-    key={feature.title}
-    title={feature.title}
-    description={feature.description}
-    href={feature.href}
-  />
-))}
+      {/* Feature section */}
+      <section id="features" className="relative px-6 py-24 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-2xl">
+            <div className="mb-4 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-blue-400">
+              <span className="h-px w-8 bg-blue-500" />
+              Everything you need
+            </div>
+
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              Simple payments.
+              <br />
+              <span className="text-zinc-500">Built for on-chain.</span>
+            </h2>
+
+            <p className="mt-4 max-w-xl text-sm leading-7 text-zinc-400 sm:text-base">
+              LinkPay keeps the payment experience simple while your
+              transactions remain on-chain and verifiable.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {features.map((feature) => (
+              <FeatureCard
+                key={feature.title}
+                title={feature.title}
+                description={feature.description}
+                href={feature.href}
+                icon={feature.icon}
+              />
+            ))}
+          </div>
+        </div>
       </section>
 
-<section className="px-8 pb-20">
-  <div className="mx-auto max-w-6xl rounded-3xl border border-zinc-800 bg-zinc-900/40 p-10">
+      <HowItWorks />
 
-    <h2 className="text-center text-4xl font-bold text-white">
-      Why LinkPay?
-    </h2>
+      {/* Built for Arc */}
+      <section className="relative px-6 py-24 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-[#0a0d14]">
+            <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-blue-600/10 blur-[120px]" />
 
-    <p className="mt-3 text-center text-gray-400">
-      Everything you need to create and manage payments on Arc Testnet.
-    </p>
+            <div className="grid items-center gap-12 p-8 sm:p-12 lg:grid-cols-[0.9fr_1.1fr] lg:p-16">
+              {/* Visual */}
+              <div className="relative flex min-h-[280px] items-center justify-center">
+                <div className="absolute h-64 w-64 rounded-full border border-blue-500/10" />
+                <div className="absolute h-48 w-48 rounded-full border border-blue-500/10" />
+                <div className="absolute h-32 w-32 rounded-full border border-blue-500/10" />
 
-    <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                <div className="relative flex h-28 w-28 items-center justify-center rounded-3xl border border-blue-400/30 bg-[#0b1220] shadow-[0_0_60px_rgba(37,99,235,0.18)]">
+                  <span className="text-5xl font-bold text-blue-500">A</span>
+                </div>
 
-      <div className="rounded-2xl border border-zinc-800 p-6">
-        <h3 className="text-xl font-semibold">⚡ Fast Payments</h3>
-        <p className="mt-3 text-gray-400">
-          Create and share crypto payment links easily.
-        </p>
-      </div>
+                <div className="absolute left-8 top-8 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-[#0d111a] text-blue-400">
+                  <Link2 size={18} />
+                </div>
 
-      <div className="rounded-2xl border border-zinc-800 p-6">
-        <h3 className="text-xl font-semibold">🔒 Secure</h3>
-        <p className="mt-3 text-gray-400">
-          Wallet based payments powered by blockchain.
-        </p>
-      </div>
+                <div className="absolute bottom-10 right-10 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-[#0d111a] text-blue-400">
+                  <Wallet size={18} />
+                </div>
+              </div>
 
-      <div className="rounded-2xl border border-zinc-800 p-6">
-        <h3 className="text-xl font-semibold">🌐 Simple Sharing</h3>
-        <p className="mt-3 text-gray-400">
-          Share payment links anywhere.
-        </p>
-      </div>
+              {/* Copy */}
+              <div>
+                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/[0.06] px-3 py-1.5 text-xs font-medium text-blue-400">
+                  <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                  BUILT FOR ARC
+                </div>
 
-      <div className="rounded-2xl border border-zinc-800 p-6">
-        <h3 className="text-xl font-semibold">📊 Explorer</h3>
-        <p className="mt-3 text-gray-400">
-          View blockchain transactions.
-        </p>
-      </div>
+                <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                  Payments made
+                  <br />
+                  <span className="text-blue-500">simple on Arc.</span>
+                </h2>
 
-    </div>
+                <p className="mt-5 max-w-lg text-sm leading-7 text-zinc-400 sm:text-base">
+                  LinkPay brings shareable payment requests, wallet
+                  connectivity and on-chain transaction visibility together
+                  in one simple experience.
+                </p>
 
-  </div>
-</section>
+                <div className="mt-7 space-y-3">
+                  {[
+                    "USDC payments on Arc Testnet",
+                    "Wallet-based payment flows",
+                    "Shareable payment requests",
+                    "Transparent on-chain activity",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center gap-3 text-sm text-zinc-300"
+                    >
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
+                        ✓
+                      </span>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section className="px-8 pb-20">
-  <div className="mx-auto max-w-6xl">
+      <FAQ />
 
-    <h2 className="text-center text-4xl font-bold text-white">
-      How LinkPay Works
-    </h2>
+      {/* CTA */}
+      <section className="px-6 pb-24 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-[#0c1424] to-[#080a0f] px-7 py-12 sm:px-12 sm:py-14">
+            <div className="absolute left-1/2 top-0 h-48 w-96 -translate-x-1/2 rounded-full bg-blue-600/10 blur-[100px]" />
 
-    <p className="mt-3 text-center text-gray-400">
-      Create, share and receive payments in simple steps.
-    </p>
+            <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+              <div>
+                <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-blue-400">
+                  Start with LinkPay
+                </p>
 
-    <div className="mt-10 grid gap-6 md:grid-cols-4">
+                <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                  Ready to accept crypto?
+                </h2>
 
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 text-center">
-        <div className="text-4xl">👛</div>
-        <h3 className="mt-4 font-semibold">Connect Wallet</h3>
-        <p className="mt-2 text-sm text-gray-400">
-          Connect your Arc wallet.
-        </p>
-      </div>
+                <p className="mt-3 max-w-lg text-sm text-zinc-400">
+                  Create your first payment link and start accepting USDC on
+                  Arc Testnet.
+                </p>
+              </div>
 
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 text-center">
-        <div className="text-4xl">🔗</div>
-        <h3 className="mt-4 font-semibold">Create Link</h3>
-        <p className="mt-2 text-sm text-gray-400">
-          Generate a payment link.
-        </p>
-      </div>
-
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 text-center">
-        <div className="text-4xl">📤</div>
-        <h3 className="mt-4 font-semibold">Share</h3>
-        <p className="mt-2 text-sm text-gray-400">
-          Share it with anyone.
-        </p>
-      </div>
-
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 text-center">
-        <div className="text-4xl">💸</div>
-        <h3 className="mt-4 font-semibold">Receive</h3>
-        <p className="mt-2 text-sm text-gray-400">
-          Receive payment in wallet.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
+              <a
+                href="/dashboard"
+                className="group inline-flex shrink-0 items-center gap-3 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.18)] transition hover:bg-blue-500"
+              >
+                Create Payment Link
+                <ArrowUpRight
+                  size={17}
+                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
-
     </main>
   );
 }

@@ -25,4 +25,4 @@ export const arcTestnet = defineChain({
   testnet: true,
 });
 
-export const networks = [arcTestnet] as const;
+export const networks = [arcTestnet];

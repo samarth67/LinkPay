@@ -153,7 +153,7 @@ router.push(
       <div className="w-full max-w-lg rounded-3xl border border-zinc-800 bg-zinc-900/60 p-8">
 
         <h1 className="text-3xl font-bold text-center mb-8">
-          💳 ArcLink Payment
+          💳 LinkPay Payment
         </h1>
 
         <div className="space-y-6">

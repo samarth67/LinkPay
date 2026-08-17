@@ -16,8 +16,8 @@ createAppKit({
   projectId: PROJECT_ID,
   defaultNetwork: arcTestnet,
   metadata: {
-    name: "ArcLink",
-    description: "The developer hub for the Arc blockchain",
+    name: "LinkPay",
+    description: "Create and share USDC payment links built on Arc Network",
     url:
       process.env.NEXT_PUBLIC_APP_URL ??
       (typeof window !== "undefined"
