@@ -44,7 +44,7 @@ export default function Hero() {
               href="/dashboard"
               className="group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_0_35px_rgba(37,99,235,0.2)] transition hover:bg-blue-500"
             >
-              Create Payment Link
+              Launch App
               <ArrowRight
                 size={16}
                 className="transition-transform group-hover:translate-x-1"

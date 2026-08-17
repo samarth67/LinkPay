@@ -4,7 +4,6 @@ import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import {
-  ArrowUpRight,
   BarChart3,
   Link2,
   ShieldCheck,
@@ -17,14 +16,14 @@ export default function Home() {
       title: "Payment Links",
       description:
         "Create a payment request and share one simple link with anyone.",
-      href: "/dashboard",
+      href: "/create-link",
       icon: Link2,
     },
     {
       title: "Wallet Integration",
       description:
         "Connect your wallet and receive payments directly on Arc Testnet.",
-      href: "/profile",
+      href: "/dashboard",
       icon: Wallet,
     },
     {
@@ -154,43 +153,6 @@ export default function Home() {
       </section>
 
       <FAQ />
-
-      {/* CTA */}
-      <section className="px-6 pb-24 sm:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-[#0c1424] to-[#080a0f] px-7 py-12 sm:px-12 sm:py-14">
-            <div className="absolute left-1/2 top-0 h-48 w-96 -translate-x-1/2 rounded-full bg-blue-600/10 blur-[100px]" />
-
-            <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-              <div>
-                <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-blue-400">
-                  Start with LinkPay
-                </p>
-
-                <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                  Ready to accept crypto?
-                </h2>
-
-                <p className="mt-3 max-w-lg text-sm text-zinc-400">
-                  Create your first payment link and start accepting USDC on
-                  Arc Testnet.
-                </p>
-              </div>
-
-              <a
-                href="/dashboard"
-                className="group inline-flex shrink-0 items-center gap-3 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.18)] transition hover:bg-blue-500"
-              >
-                Create Payment Link
-                <ArrowUpRight
-                  size={17}
-                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </main>
