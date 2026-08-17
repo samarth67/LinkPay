@@ -357,8 +357,8 @@ export default function DashboardPage() {
         .filter((token) => {
           try {
             return BigInt(
-              token.rawBalance || "0"
-            ) > 0n;
+  token.rawBalance || "0"
+) > BigInt(0);
           } catch {
             return false;
           }
