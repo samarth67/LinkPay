@@ -20,9 +20,9 @@ import {
 import { useAccount, useBalance, useChainId } from "wagmi";
 import { formatUnits } from "viem";
 
-const ARC_CHAIN_ID = 5042002;
-const ARC_SCAN = "https://testnet.arcscan.app";
-const BLOCKSCOUT_API = "https://testnet.arcscan.app/api/v2";
+const ARC_CHAIN_ID = 5042;
+const ARC_SCAN = "https://explorer.arc.io";
+const BLOCKSCOUT_API = "https://explorer.arc.io/api/v2";
 
 type TokenBalance = {
   token: {
@@ -396,7 +396,7 @@ export default function DashboardPage() {
       );
 
       setPortfolioError(
-        "Unable to load token balances from ArcScan right now."
+        "Unable to load token balances from Arc Explorer right now."
       );
 
       setTokens([]);
@@ -829,7 +829,7 @@ export default function DashboardPage() {
               </h1>
 
               <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-zinc-400">
-                Connect your Arc Testnet wallet
+                Connect your Arc Mainnet wallet
                 to view your real balances,
                 tokens and on-chain activity.
               </p>
@@ -874,7 +874,7 @@ export default function DashboardPage() {
             </h1>
 
             <p className="mt-2 text-sm text-zinc-500">
-              Your complete Arc Testnet wallet
+              Your complete Arc Mainnet wallet
               overview.
             </p>
           </div>
@@ -896,7 +896,7 @@ export default function DashboardPage() {
               />
 
               {networkIsCorrect
-                ? "Arc Testnet"
+                ? "Arc Mainnet"
                 : `Chain ${chainId}`}
             </div>
 
@@ -1460,7 +1460,7 @@ export default function DashboardPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-400 transition hover:text-blue-300"
             >
-              View on ArcScan
+              View on Arc Explorer
               <ExternalLink size={13} />
             </a>
           </div>

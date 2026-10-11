@@ -85,7 +85,7 @@ export default function SuccessContent() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
 
             <a
-              href={`https://testnet.arcscan.app/tx/${tx}`}
+              href={`https://explorer.arc.io/tx/${tx}`}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-green-500 py-3 text-center hover:bg-green-500/10 transition"

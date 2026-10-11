@@ -108,8 +108,8 @@ export default function Navbar() {
             >
               Faucet
             </Link>
-
-            {/* History */}
+             
+             {/* History */}
             <Link
               href="/history"
               className={`rounded-lg px-3.5 py-2 text-[13px] font-medium transition ${

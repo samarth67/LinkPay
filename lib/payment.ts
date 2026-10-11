@@ -10,6 +10,7 @@ export async function createPaymentLink(data: {
     wallet: data.wallet,
     amount: data.amount,
     note: data.note,
+    chainId: 5042,
     status: "pending",
     createdAt: serverTimestamp(),
   });

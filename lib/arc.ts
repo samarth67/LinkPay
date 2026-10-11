@@ -1,28 +1,27 @@
 import { defineChain } from "@reown/appkit/networks";
 
-/**
- * Arc Testnet chain definition per official Arc docs:
- * https://docs.arc.io/arc/references/connect-to-arc
- *
- * Must use defineChain from @reown/appkit/networks (not viem) so
- * caipNetworkId and chainNamespace are included for AppKit.
- */
-export const arcTestnet = defineChain({
-  id: 5042002,
-  caipNetworkId: "eip155:5042002",
+export const arcMainnet = defineChain({
+  id: 5042,
+  caipNetworkId: "eip155:5042",
   chainNamespace: "eip155",
-  name: "Arc Testnet",
-  nativeCurrency: { decimals: 18, name: "USDC", symbol: "USDC" },
+  name: "Arc",
+  nativeCurrency: {
+    decimals: 18,
+    name: "USDC",
+    symbol: "USDC",
+  },
   rpcUrls: {
     default: {
-      http: ["https://rpc.testnet.arc.io"],
-      webSocket: ["wss://rpc.testnet.arc.io"],
+      http: ["https://rpc.mainnet.arc.io"],
     },
   },
   blockExplorers: {
-    default: { name: "ArcScan", url: "https://testnet.arcscan.app" },
+    default: {
+      name: "Arc Explorer",
+      url: "https://explorer.arc.io",
+    },
   },
-  testnet: true,
+  testnet: false,
 });
 
-export const networks = [arcTestnet];
+export const networks = [arcMainnet];

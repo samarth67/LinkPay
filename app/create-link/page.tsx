@@ -36,12 +36,7 @@ const PAYMENT_TOKENS: PaymentToken[] = [
     description: "Euro Coin",
     available: false,
   },
-  {
-    symbol: "ARC",
-    name: "Arc",
-    description: "Arc native asset",
-    available: false,
-  },
+  
   {
     symbol: "LINK",
     name: "LinkPay Token",
@@ -171,7 +166,7 @@ export default function CreateLinkPage() {
               </h1>
 
               <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-zinc-500">
-                Connect your Arc Testnet wallet to create a real payment link.
+                Connect your Arc Mainnet wallet to create a real payment link.
               </p>
 
               <div className="mt-5 flex items-center justify-center gap-2 text-xs text-zinc-600">
@@ -402,7 +397,7 @@ export default function CreateLinkPage() {
               </button>
 
               <p className="mt-3 text-center text-[10px] text-zinc-700">
-                Payment requests are created for your connected Arc Testnet
+                Payment requests are created for your connected Arc Mainnet
                 wallet.
               </p>
             </div>
@@ -421,7 +416,7 @@ export default function CreateLinkPage() {
                 </div>
 
                 <div className="rounded-lg border border-white/[0.06] bg-white/[0.025] px-2.5 py-1.5 text-[10px] text-zinc-600">
-                  Arc Testnet
+                  Arc Mainnet
                 </div>
               </div>
 
@@ -551,7 +546,7 @@ export default function CreateLinkPage() {
           <span className="h-1 w-1 rounded-full bg-zinc-800" />
           <span>Non-custodial</span>
           <span className="h-1 w-1 rounded-full bg-zinc-800" />
-          <span>Powered by Arc Testnet</span>
+          <span>Powered by Arc Mainnet</span>
         </div>
       </div>
     </main>

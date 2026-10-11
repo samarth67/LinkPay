@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -18,85 +19,124 @@ type Payment = {
   amount: string;
   note: string;
   status: string;
+  chainId?: number;
   txHash?: string;
+  createdAt?: { seconds?: number };
 };
 
 export default function HistoryPage() {
   const { address } = useAccount();
-  console.log("Connected wallet:", address);
 
   const [payments, setPayments] = useState<Payment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    if (!address) {
-      setPayments([]);
-      setLoading(false);
-      return;
-    }
+    let cancelled = false;
 
     async function loadPayments() {
+      setLoading(true);
+      setErrorMessage("");
+
+      if (!address) {
+        setPayments([]);
+        setLoading(false);
+        return;
+      }
+
       try {
         const q = query(
           collection(db, "paymentLinks"),
           where("wallet", "==", address),
           where("status", "==", "paid"),
+          where("chainId", "==", 5042),
           orderBy("createdAt", "desc")
         );
 
         const snapshot = await getDocs(q);
-        
-        console.log("Connected wallet:", address);
-        console.log("Firestore query wallet:", address);
-        console.log("Docs found:", snapshot.docs.length);
-        console.log(snapshot.docs.map(doc => doc.data()));
-        console.log("Docs found:", snapshot.docs.length);
-        console.log(snapshot.docs);
 
-        const list: Payment[] = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as Omit<Payment, "id">),
+        console.log("History wallet:", address);
+        console.log("History documents found:", snapshot.size);
+        console.log(
+          "History data:",
+          snapshot.docs.map((item) => ({
+            id: item.id,
+            ...item.data(),
+          }))
+        );
+
+        const list: Payment[] = snapshot.docs.map((item) => ({
+          id: item.id,
+          ...(item.data() as Omit<Payment, "id">),
         }));
 
-        setPayments(list);
-      } catch (err) {
-        console.error(err);
+        if (!cancelled) setPayments(list);
+      } catch (error) {
+        console.error("HISTORY FIRESTORE ERROR:", error);
+
+        if (!cancelled) {
+          setErrorMessage(
+            error instanceof Error
+              ? error.message
+              : "Could not load payment history."
+          );
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
 
-    loadPayments();
+    void loadPayments();
+
+    return () => {
+      cancelled = true;
+    };
   }, [address]);
 
   return (
     <div className="min-h-screen text-white">
-      <div className="relative border-b border-zinc-800 px-8 py-10 overflow-hidden">
-        <div className="absolute top-0 left-1/4 h-[400px] w-[400px] rounded-full bg-blue-600/10 blur-[100px]" />
-
-        <h1 className="relative bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-4xl font-bold text-transparent">
-          📊 Payment Activity
-        </h1>
-
-        <p className="relative mt-2 text-gray-400">
+      <div className="border-b border-zinc-800 px-8 py-10">
+        <h1 className="text-4xl font-bold">📊 Payment Activity</h1>
+        <p className="mt-2 text-gray-400">
           Track your payment links and completed transactions.
         </p>
+        {address && (
+          <p className="mt-3 break-all font-mono text-xs text-gray-500">
+            Connected wallet: {address}
+          </p>
+        )}
       </div>
 
       <div className="mx-auto max-w-4xl p-8">
         {loading ? (
-          <div className="text-center text-gray-400">Loading...</div>
+          <div className="text-center text-gray-400">
+            Loading payment history...
+          </div>
+        ) : errorMessage ? (
+          <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6">
+            <h2 className="font-bold text-red-400">
+              History Loading Error
+            </h2>
+            <p className="mt-2 break-words text-sm text-red-300">
+              {errorMessage}
+            </p>
+          </div>
+        ) : !address ? (
+          <div className="rounded-3xl border border-zinc-800 p-10 text-center">
+            <h2 className="text-2xl font-bold">Connect Your Wallet</h2>
+            <p className="mt-2 text-gray-400">
+              Connect the receiver wallet to view its payment history.
+            </p>
+          </div>
         ) : payments.length === 0 ? (
           <div className="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-10 text-center">
             <h2 className="text-2xl font-bold">No Payments Yet</h2>
-
             <p className="mt-2 text-gray-400">
-              Create your first payment link.
+              No paid links were found for this wallet on Arc Mainnet.
             </p>
-
             <Link
               href="/dashboard"
-              className="mt-6 inline-block rounded-xl bg-blue-600 px-6 py-3 transition hover:bg-blue-700"
+              className="mt-6 inline-block rounded-xl bg-blue-600 px-6 py-3 hover:bg-blue-700"
             >
               Back to Dashboard
             </Link>
@@ -106,57 +146,41 @@ export default function HistoryPage() {
             {payments.map((payment) => (
               <div
                 key={payment.id}
-                className="group rounded-3xl border border-zinc-800 bg-gradient-to-br from-zinc-900/80 to-black p-7 transition hover:-translate-y-1 hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(37,99,235,0.15)]"
+                className="rounded-3xl border border-zinc-800 bg-gradient-to-br from-zinc-900/80 to-black p-7"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600/20 text-2xl">
-                      💸
-                    </div>
-
-                    <div>
-                      <h2 className="text-3xl font-bold">
-                        {payment.amount} USDC
-                      </h2>
-
-                      <p className="text-gray-400">
-                        {payment.note || "Payment Request"}
-                      </p>
-                    </div>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-3xl font-bold">
+                      {payment.amount} USDC
+                    </h2>
+                    <p className="mt-1 text-gray-400">
+                      {payment.note || "Payment Request"}
+                    </p>
                   </div>
-
-                  {payment.status === "paid" ? (
-                    <span className="rounded-full bg-green-500/20 px-4 py-2 text-green-400">
-                      ✅ Paid
-                    </span>
-                  ) : (
-                    <span className="rounded-full bg-yellow-500/20 px-4 py-2 text-yellow-400">
-                      ⏳ Pending
-                    </span>
-                  )}
+                  <span className="rounded-full bg-green-500/20 px-4 py-2 text-green-400">
+                    ✅ Paid
+                  </span>
                 </div>
 
                 <div className="mt-6 border-t border-zinc-800 pt-5">
                   <p className="text-xs text-gray-500">Receiver Wallet</p>
-
                   <p className="mt-2 break-all font-mono text-sm">
                     {payment.wallet}
                   </p>
                 </div>
 
                 {payment.txHash && (
-                  <div className="mt-5 flex items-center justify-between rounded-xl bg-green-500/10 p-4">
+                  <div className="mt-5 rounded-xl bg-green-500/10 p-4">
                     <p className="break-all font-mono text-xs">
-                      {payment.txHash.slice(0, 20)}...
+                      {payment.txHash}
                     </p>
-
                     <a
-                      href={`https://testnet.arcscan.app/tx/${payment.txHash}`}
+                      href={`https://explorer.arc.io/tx/${payment.txHash}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="rounded-lg bg-green-600 px-4 py-2 text-sm"
+                      className="mt-3 inline-block rounded-lg bg-green-600 px-4 py-2 text-sm"
                     >
-                      Explorer ↗
+                      View Transaction ↗
                     </a>
                   </div>
                 )}

@@ -4,7 +4,7 @@ import { createAppKit } from "@reown/appkit/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 
-import { arcTestnet, networks } from "@/lib/arc";
+import { arcMainnet, networks } from "@/lib/arc";
 import { PROJECT_ID } from "@/lib/config";
 import { wagmiAdapter } from "@/lib/wagmi";
 
@@ -12,9 +12,9 @@ const queryClient = new QueryClient();
 
 createAppKit({
   adapters: [wagmiAdapter],
-  networks: [arcTestnet],
+  networks: [arcMainnet],
   projectId: PROJECT_ID,
-  defaultNetwork: arcTestnet,
+  defaultNetwork: arcMainnet,
   metadata: {
     name: "LinkPay",
     description: "Create and share USDC payment links built on Arc Network",
@@ -42,7 +42,9 @@ export default function WalletProvider({
 }) {
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig} reconnectOnMount>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        {children}
+      </QueryClientProvider>
     </WagmiProvider>
   );
 }
